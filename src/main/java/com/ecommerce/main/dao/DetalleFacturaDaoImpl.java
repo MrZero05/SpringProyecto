@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.ecommerce.main.entities.Detallefactura;
 
 @Component
-public class detalleFacturaDaoImpl implements ITDetalleFactura{
+public class DetalleFacturaDaoImpl implements ITDetalleFactura{
 
 	@PersistenceContext
 	private EntityManager em;
