@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.ecommerce.main.entities.Categoria;
 
 @Component
-public class categoriaDaoImpl implements ITCategoria{
+public class CategoriaDaoImpl implements ITCategoria{
 
 	@PersistenceContext
 	private EntityManager em;
