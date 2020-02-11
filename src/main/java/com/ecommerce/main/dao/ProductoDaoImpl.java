@@ -41,4 +41,10 @@ public class ProductoDaoImpl implements ITProducto{
 		return (Productos) em.createQuery("from Productos where prodId= "+ prodId).getResultList().get(0);
 	}
 
+	@Override
+	public List<Productos> listarProductoByCategoria(long catId) throws Exception {
+		// TODO Auto-generated method stub
+		return em.createQuery("from Productos where catId= "+ catId).getResultList();
+	}
+
 }

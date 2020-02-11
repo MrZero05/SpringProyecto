@@ -17,7 +17,7 @@ public class CategoriaServiceImpl implements ITCategoriaService {
 	@Override
 	public List<Categoria> listarCategoriaAll() throws Exception {
 		// TODO Auto-generated method stub
-		return repoCategoriaService.listarCategiraAll();
+		return repoCategoriaService.listarCategoriaAll();
 	}
 
 }
