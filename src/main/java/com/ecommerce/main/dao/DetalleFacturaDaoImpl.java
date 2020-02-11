@@ -18,7 +18,7 @@ public class DetalleFacturaDaoImpl implements ITDetalleFactura{
 	@Override
 	public List<Detallefactura> listarDetalleFacturaByFactura(long factId) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return em.createQuery("from DetalleFactura where detfactId ="+factId).getResultList();
 	}
 
 }

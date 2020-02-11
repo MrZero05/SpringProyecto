@@ -16,9 +16,9 @@ public class CategoriaDaoImpl implements ITCategoria{
 	private EntityManager em;
 	
 	@Override
-	public List<Categoria> listarCategiraAll() throws Exception {
+	public List<Categoria> listarCategoriaAll() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return em.createQuery("from Categoria").getResultList();
 	}
 
 }
