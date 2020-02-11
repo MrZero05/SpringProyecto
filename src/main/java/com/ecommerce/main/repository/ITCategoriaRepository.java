@@ -6,5 +6,5 @@ import com.ecommerce.main.entities.Categoria;
 
 public interface ITCategoriaRepository {
 
-	List<Categoria> listarCategiraAll() throws Exception;
+	List<Categoria> listarCategoriaAll() throws Exception;
 }

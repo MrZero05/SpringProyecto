@@ -18,25 +18,27 @@ public class ProductoDaoImpl implements ITProducto{
 	@Override
 	public void crearProducto(Productos producto) throws Exception {
 		// TODO Auto-generated method stub
-		
+		em.merge(producto);
+		em.flush();
 	}
 
 	@Override
 	public void modificarProducto(Productos producto) throws Exception {
 		// TODO Auto-generated method stub
-		
+		em.persist(producto);
+		em.flush();
 	}
 
 	@Override
 	public List<Productos> listarProductoAll() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return em.createQuery("from Productos").getResultList();
 	}
 
 	@Override
 	public Productos getProductoById(long prodId) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return (Productos) em.createQuery("from Productos where prodId= "+ prodId).getResultList().get(0);
 	}
 
 }

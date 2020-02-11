@@ -15,9 +15,9 @@ public class CategoriaRepositotyImpl implements ITCategoriaRepository{
 	ITCategoria daoCategoria;
 	
 	@Override
-	public List<Categoria> listarCategiraAll() throws Exception {
+	public List<Categoria> listarCategoriaAll() throws Exception {
 		// TODO Auto-generated method stub
-		return daoCategoria.listarCategiraAll();
+		return daoCategoria.listarCategoriaAll();
 	}
 
 }
