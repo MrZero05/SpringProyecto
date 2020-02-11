@@ -39,6 +39,7 @@ public class ProductoDaoImpl implements ITProducto{
 	public Productos getProductoById(long prodId) throws Exception {
 		// TODO Auto-generated method stub
 		return (Productos) em.createQuery("from Productos where prodId= "+ prodId).getResultList().get(0);
+
 	}
 
 }

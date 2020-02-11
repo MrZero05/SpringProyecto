@@ -38,4 +38,10 @@ public class ProductoRepositotyImpl implements ITProductosRepository{
 		return daoProducto.getProductoById(prodId);
 	}
 
+	@Override
+	public List<Productos> listarProductoByCategoria(long catId) throws Exception {
+		// TODO Auto-generated method stub
+		return daoProducto.listarProductoByCategoria(catId);
+	}
+
 }

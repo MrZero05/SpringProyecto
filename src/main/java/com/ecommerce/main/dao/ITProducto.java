@@ -10,4 +10,5 @@ public interface ITProducto {
 	void modificarProducto(Productos producto)throws Exception;
 	List<Productos> listarProductoAll()throws Exception;
 	Productos getProductoById(long prodId)throws Exception;
+	List<Productos> listarProductoByCategoria(long catId)throws Exception;
 }
