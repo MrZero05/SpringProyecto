@@ -55,7 +55,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String username = null;
         String password = null;
-
         try {
 
             Usuario user = null;
@@ -64,9 +63,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             user = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
             username = user.getUserNombre();
             password = user.getUserPassword();
-
-            LOG.info("user json: " + username);
-            LOG.info("password json: " + password);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,7 +75,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+    				FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
         String userName = ((User) authResult.getPrincipal()).getUsername();
         Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
@@ -89,10 +86,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userName)
-                .signWith(SignatureAlgorithm.HS512, "clavesecreta123456".getBytes())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 3600000L))
-                .compact();
+                .signWith(SignatureAlgorithm.HS512, "clavesecreta123456".getBytes()).compact();
 
         response.addHeader("Authorization", "Bearer " + token);
 
