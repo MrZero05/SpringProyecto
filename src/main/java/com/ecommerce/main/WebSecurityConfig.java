@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.session.SessionManagementFilter;
 
 import com.ecommerce.main.security.JWTAuthenticationFilter;
 import com.ecommerce.main.service.UsuarioServiceImpl;
@@ -31,6 +32,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		return encoder;
 	}
 	
+    @Bean
+    CorsFilter corsFilter() {
+        CorsFilter filter = new CorsFilter();
+        return filter;
+    }
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
@@ -39,6 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+		    .addFilterBefore(corsFilter(), SessionManagementFilter.class)
 			.authorizeRequests()
 			.anyRequest().authenticated()
 			.and()
