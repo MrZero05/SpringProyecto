@@ -18,9 +18,15 @@ public class ProductoController {
 	@Autowired
 	ITProductosService serviceProductos;
 	
-	@GetMapping(value = "/listar/{catId}")
+	@GetMapping(value = "/listProducto/{catId}")
 	public List<Productos> listarProductosByCategoria(@PathVariable(required = true)Long catId) throws Exception{
 		return serviceProductos.listarProductoByCategoria(catId);
 	}
+	
+	@GetMapping(value = "/getProducto/{prodId}")
+	public Productos getProductosById(@PathVariable(required = true)Long prodId) throws Exception{
+		return serviceProductos.getProductoById(prodId);
+	}
+
 
 }
