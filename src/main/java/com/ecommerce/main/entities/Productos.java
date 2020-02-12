@@ -47,8 +47,6 @@ public class Productos implements Serializable {
     private String prodCodigo;
     @Column(name = "prodPrecio")
     private Integer prodPrecio;
-    @OneToMany(mappedBy = "prodId")
-    private Collection<Detallefactura> detallefacturaCollection;
     @JoinColumn(name = "catId", referencedColumnName = "catId")
     @ManyToOne
     private Categoria catId;
@@ -90,15 +88,6 @@ public class Productos implements Serializable {
 
     public void setProdPrecio(Integer prodPrecio) {
         this.prodPrecio = prodPrecio;
-    }
-
-    @XmlTransient
-    public Collection<Detallefactura> getDetallefacturaCollection() {
-        return detallefacturaCollection;
-    }
-
-    public void setDetallefacturaCollection(Collection<Detallefactura> detallefacturaCollection) {
-        this.detallefacturaCollection = detallefacturaCollection;
     }
 
     public Categoria getCatId() {

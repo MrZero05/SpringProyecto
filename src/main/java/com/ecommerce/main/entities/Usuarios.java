@@ -46,8 +46,6 @@ public class Usuarios implements Serializable {
     @Size(max = 45)
     @Column(name = "userPassword")
     private String userPassword;
-    @OneToMany(mappedBy = "userId")
-    private Collection<Factura> facturaCollection;
 
     public Usuarios() {
     }
@@ -86,15 +84,6 @@ public class Usuarios implements Serializable {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
-    }
-
-    @XmlTransient
-    public Collection<Factura> getFacturaCollection() {
-        return facturaCollection;
-    }
-
-    public void setFacturaCollection(Collection<Factura> facturaCollection) {
-        this.facturaCollection = facturaCollection;
     }
 
     @Override

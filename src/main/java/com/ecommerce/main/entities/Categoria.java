@@ -40,8 +40,6 @@ public class Categoria implements Serializable {
     @Size(max = 45)
     @Column(name = "catNombre")
     private String catNombre;
-    @OneToMany(mappedBy = "catId")
-    private Collection<Productos> productosCollection;
 
     public Categoria() {
     }
@@ -64,15 +62,6 @@ public class Categoria implements Serializable {
 
     public void setCatNombre(String catNombre) {
         this.catNombre = catNombre;
-    }
-
-    @XmlTransient
-    public Collection<Productos> getProductosCollection() {
-        return productosCollection;
-    }
-
-    public void setProductosCollection(Collection<Productos> productosCollection) {
-        this.productosCollection = productosCollection;
     }
 
     @Override
