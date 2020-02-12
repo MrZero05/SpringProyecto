@@ -51,7 +51,7 @@ public class UsuarioServiceImpl implements ITUsuarioService, UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario user= repoUsuarioService.findByUserNombre(username);
+		Usuario user = repoUsuarioService.findByUserNombre(username);
 		
 		List<GrantedAuthority> roles =  new ArrayList<GrantedAuthority>();
 		roles.add(new SimpleGrantedAuthority("ADMIN"));

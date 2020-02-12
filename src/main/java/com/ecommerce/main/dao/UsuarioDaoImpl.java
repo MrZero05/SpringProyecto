@@ -50,7 +50,7 @@ public class UsuarioDaoImpl implements ITUsuario{
 
 	@Override
 	public Usuario findByUserNombre(String name) {
-		String hql = "from Usuarios where userNombre = :userNombre"; 		
+		String hql = "from Usuario where userNombre = :userNombre"; 		
 		Query query = em.createQuery(hql);		
 		query.setParameter("userNombre",name); 
 		

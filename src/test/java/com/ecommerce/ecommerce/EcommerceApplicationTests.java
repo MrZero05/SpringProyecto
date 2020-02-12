@@ -3,7 +3,7 @@ package com.ecommerce.ecommerce;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+//import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +14,7 @@ import com.ecommerce.main.EcommerceApplication;
 import com.ecommerce.main.entities.Usuario;
 import com.ecommerce.main.repository.UsuarioRepositoryImpl;
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @WebAppConfiguration
 @SpringBootTest(classes = EcommerceApplication.class)
 class EcommerceApplicationTests {
@@ -29,12 +29,13 @@ class EcommerceApplicationTests {
 	public void createUsuario() throws Exception {
 		Usuario user = new Usuario();
 		
-		user.setUserId(101);
-		user.setUserNombre("admin");
-		user.setUserPassword(encoder.encode("a1234567"));
+		user.setUserId(102);
+		user.setUserNombre("sergio");
+		user.setUserPassword("a123456");
 		
 		repo.addUsuario(user);
-		assertTrue(repo.findByUserNombre("admin").getUserNombre().equalsIgnoreCase(user.getUserNombre()) );
+		System.out.println(repo.findByUserNombre("sergio").getUserPassword());
+		assertTrue(repo.findByUserNombre("sergio").getUserPassword().equalsIgnoreCase(user.getUserPassword()) );
 	}
 
 }
