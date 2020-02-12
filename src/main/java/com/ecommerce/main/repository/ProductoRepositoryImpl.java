@@ -1,51 +1,47 @@
-package com.ecommerce.main.dao;
+package com.ecommerce.main.repository;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import org.springframework.stereotype.Component;
-
+import com.ecommerce.main.dao.ITProducto;
 import com.ecommerce.main.entities.Producto;
 
-@Component
-public class ProductoDaoImpl implements ITProducto{
+@Repository
+public class ProductoRepositoryImpl implements ITProductosRepository{
 
-	@PersistenceContext
-	private EntityManager em;
+	@Autowired
+	ITProducto daoProducto;
 	
 	@Override
 	public void addProducto(Producto producto) throws Exception {
 		// TODO Auto-generated method stub
-		em.merge(producto);
-		em.flush();
+		daoProducto.addProducto(producto);
 	}
 
 	@Override
 	public void updateProducto(Producto producto) throws Exception {
 		// TODO Auto-generated method stub
-		em.persist(producto);
-		em.flush();
+		daoProducto.updateProducto(producto);
 	}
 
 	@Override
 	public List<Producto> listProductoAll() throws Exception {
 		// TODO Auto-generated method stub
-		return em.createQuery("from Producto").getResultList();
+		return daoProducto.listProductoAll();
 	}
 
 	@Override
 	public Producto getProductoById(long prodId) throws Exception {
 		// TODO Auto-generated method stub
-		return (Producto) em.createQuery("from Producto where prodId= "+ prodId).getResultList().get(0);
-
+		return daoProducto.getProductoById(prodId);
 	}
 
 	@Override
 	public List<Producto> listProductoByCategoria(long catId) throws Exception {
 		// TODO Auto-generated method stub
-		return em.createQuery("from Producto where catId= "+ catId).getResultList();
+		return daoProducto.listProductoByCategoria(catId);
 	}
 
 }

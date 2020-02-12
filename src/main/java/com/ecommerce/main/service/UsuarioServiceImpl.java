@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.ecommerce.main.entities.Usuarios;
+import com.ecommerce.main.entities.Usuario;
 import com.ecommerce.main.repository.ITUsuariosRepository;
 
 @Service
@@ -22,36 +22,36 @@ public class UsuarioServiceImpl implements ITUsuarioService, UserDetailsService{
 	ITUsuariosRepository repoUsuarioService;
 
 	@Override
-	public List<Usuarios> listadoUsuariosAll() throws Exception {
+	public List<Usuario> listUsuarioAll() throws Exception {
 		
-		return repoUsuarioService.listadoUsuariosAll();
+		return repoUsuarioService.listUsuarioAll();
 	}
 
 	@Override
-	public Usuarios getUsuarioById(long usuId) throws Exception {
+	public Usuario getUsuarioById(long usuId) throws Exception {
 		// TODO Auto-generated method stub
 		return repoUsuarioService.getUsuarioById(usuId);
 	}
 
 	@Override
-	public Usuarios getUsusarioByNameByPass(String userName, String userPass) throws Exception {
+	public Usuario getUsuarioByNameByPass(String userName, String userPass) throws Exception {
 		// TODO Auto-generated method stub
-		return repoUsuarioService.getUsusarioByNameByPass(userName, userPass);
+		return repoUsuarioService.getUsuarioByNameByPass(userName, userPass);
 	}
 
 	@Override
-	public void creaUsuario(Usuarios usuario) throws Exception {
-		repoUsuarioService.creaUsuario(usuario);		
+	public void addUsuario(Usuario usuario) throws Exception {
+		repoUsuarioService.addUsuario(usuario);		
 	}
 
 	@Override
-	public void actualizarUsuario(Usuarios usuario) throws Exception {
-		repoUsuarioService.actualizarUsuario(usuario);		
+	public void updateUsuario(Usuario usuario) throws Exception {
+		repoUsuarioService.updateUsuario(usuario);		
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuarios user= repoUsuarioService.findByUserNombre(username);
+		Usuario user= repoUsuarioService.findByUserNombre(username);
 		
 		List<GrantedAuthority> roles =  new ArrayList<GrantedAuthority>();
 		roles.add(new SimpleGrantedAuthority("ADMIN"));
