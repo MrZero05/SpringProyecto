@@ -39,9 +39,9 @@ public class ProductoRepositoryImpl implements ITProductosRepository{
 	}
 
 	@Override
-	public List<Producto> listProductoByCategoria(long catId) throws Exception {
+	public List<Producto> listProductoByCategoria(String catNombre) throws Exception {
 		// TODO Auto-generated method stub
-		return daoProducto.listProductoByCategoria(catId);
+		return daoProducto.listProductoByCategoria(catNombre);
 	}
 
 }
