@@ -43,7 +43,7 @@ public class Usuario implements Serializable {
     @Size(max = 45)
     @Column(name = "userCorreo")
     private String userCorreo;
-    @Size(max = 45)
+    @Size(max = 100)
     @Column(name = "userPassword")
     private String userPassword;
 

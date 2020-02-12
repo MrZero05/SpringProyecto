@@ -7,9 +7,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.ecommerce.main.security.JWTAuthenticationFilter;
 import com.ecommerce.main.service.UsuarioServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 @EnableWebSecurity
@@ -20,6 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -36,9 +40,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			.anyRequest()
-			.authenticated()
+			.anyRequest().authenticated()
 			.and()
-			.httpBasic();
+			.addFilter(new JWTAuthenticationFilter(authenticationManager()))
+			.csrf().disable()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
+	
 }
