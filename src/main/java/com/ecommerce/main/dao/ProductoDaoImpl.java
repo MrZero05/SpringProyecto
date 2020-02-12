@@ -43,9 +43,11 @@ public class ProductoDaoImpl implements ITProducto{
 	}
 
 	@Override
-	public List<Producto> listProductoByCategoria(long catId) throws Exception {
+	public List<Producto> listProductoByCategoria(String catNombre) throws Exception {
 		// TODO Auto-generated method stub
-		return em.createQuery("from Producto where catId= "+ catId).getResultList();
+		String hql=  "select p.* from Producto p inner join Categoria c on c.catId = p.catId where p.catNombre = $1";
+		List<Producto> list = em.createQuery(hql).setParameter(1, catNombre).getResultList();
+		return list;
 	}
 
 }
