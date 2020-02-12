@@ -45,7 +45,7 @@ public class Detallefactura implements Serializable {
     private Factura factId;
     @JoinColumn(name = "prodId", referencedColumnName = "prodId")
     @ManyToOne
-    private Productos prodId;
+    private Producto prodId;
 
     public Detallefactura() {
     }
@@ -86,11 +86,11 @@ public class Detallefactura implements Serializable {
         this.factId = factId;
     }
 
-    public Productos getProdId() {
+    public Producto getProdId() {
         return prodId;
     }
 
-    public void setProdId(Productos prodId) {
+    public void setProdId(Producto prodId) {
         this.prodId = prodId;
     }
 

@@ -9,7 +9,7 @@ import com.ecommerce.main.dao.ITFactura;
 import com.ecommerce.main.entities.Factura;
 
 @Repository
-public class FacturaRepositotyImpl implements ITFacturaRepository{
+public class FacturaRepositoryImpl implements ITFacturaRepository{
 
 	@Autowired
 	ITFactura daoFactura;
