@@ -18,7 +18,8 @@ public class UsuarioDaoImpl implements ITUsusario{
 	@Override
 	public List<Usuarios> listadoUsuariosAll() throws Exception {
 		// TODO Auto-generated method stub
-		return em.createQuery("from Usuarios").getResultList();
+		 List<Usuarios> result = em.createQuery("from Usuarios").getResultList();
+		return result;
 	}
 
 	@Override
@@ -43,6 +44,11 @@ public class UsuarioDaoImpl implements ITUsusario{
 	public void actualizarUsuario(Usuarios usuario) throws Exception {
 		// TODO Auto-generated method stub
 		em.merge(usuario);
+	}
+
+	@Override
+	public Usuarios findByUserNombre(String name) {
+		return (Usuarios) em.createQuery("from Usuarios where userNombre=" + name ).getResultList().get(0);
 	}
 
 }
