@@ -1,10 +1,10 @@
-package com.ecommerce.main.repository;
+package com.ecommerce.main.dao;
 
 import java.util.List;
 
 import com.ecommerce.main.entities.Usuario;
 
-public interface ITUsuariosRepository {
+public interface ITUsuario {
 	public List<Usuario> listUsuarioAll() throws Exception;
 	public Usuario getUsuarioById(long usuId) throws Exception;
 	public Usuario getUsuarioByNameByPass(String userName, String userPass) throws Exception;

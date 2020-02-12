@@ -25,11 +25,11 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author josorio
  */
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")})
-public class Usuarios implements Serializable {
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
+public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,10 +47,10 @@ public class Usuarios implements Serializable {
     @Column(name = "userPassword")
     private String userPassword;
 
-    public Usuarios() {
+    public Usuario() {
     }
 
-    public Usuarios(Integer userId) {
+    public Usuario(Integer userId) {
         this.userId = userId;
     }
 
@@ -96,10 +96,10 @@ public class Usuarios implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuarios)) {
+        if (!(object instanceof Usuario)) {
             return false;
         }
-        Usuarios other = (Usuarios) object;
+        Usuario other = (Usuario) object;
         if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
             return false;
         }
@@ -108,7 +108,7 @@ public class Usuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.Usuarios[ userId=" + userId + " ]";
+        return "jpa.Usuario[ userId=" + userId + " ]";
     }
     
 }

@@ -27,11 +27,11 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author josorio
  */
 @Entity
-@Table(name = "productos")
+@Table(name = "producto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Productos.findAll", query = "SELECT p FROM Productos p")})
-public class Productos implements Serializable {
+    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p")})
+public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,10 +51,10 @@ public class Productos implements Serializable {
     @ManyToOne
     private Categoria catId;
 
-    public Productos() {
+    public Producto() {
     }
 
-    public Productos(Integer prodId) {
+    public Producto(Integer prodId) {
         this.prodId = prodId;
     }
 
@@ -108,10 +108,10 @@ public class Productos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Productos)) {
+        if (!(object instanceof Producto)) {
             return false;
         }
-        Productos other = (Productos) object;
+        Producto other = (Producto) object;
         if ((this.prodId == null && other.prodId != null) || (this.prodId != null && !this.prodId.equals(other.prodId))) {
             return false;
         }
@@ -120,7 +120,7 @@ public class Productos implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.Productos[ prodId=" + prodId + " ]";
+        return "jpa.Producto[ prodId=" + prodId + " ]";
     }
     
 }
