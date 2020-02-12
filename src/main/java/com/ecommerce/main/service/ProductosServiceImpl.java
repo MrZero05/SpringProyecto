@@ -37,9 +37,9 @@ public class ProductosServiceImpl implements ITProductosService {
 	}
 
 	@Override
-	public List<Producto> listProductoByCategoria(long catId) throws Exception {
+	public List<Producto> listProductoByCategoria(String catNombre) throws Exception {
 		
-		return repoProductoService.listProductoByCategoria(catId);
+		return repoProductoService.listProductoByCategoria(catNombre);
 	}
 
 }
