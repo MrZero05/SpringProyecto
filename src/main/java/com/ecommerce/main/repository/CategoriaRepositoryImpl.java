@@ -9,7 +9,7 @@ import com.ecommerce.main.dao.ITCategoria;
 import com.ecommerce.main.entities.Categoria;
 
 @Repository
-public class CategoriaRepositotyImpl implements ITCategoriaRepository{
+public class CategoriaRepositoryImpl implements ITCategoriaRepository{
 
 	@Autowired
 	ITCategoria daoCategoria;

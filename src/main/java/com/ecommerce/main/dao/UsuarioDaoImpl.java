@@ -4,54 +4,57 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ecommerce.main.entities.Usuarios;
+import com.ecommerce.main.entities.Usuario;
 
 @Component
-public class UsuarioDaoImpl implements ITUsusario{
+public class UsuarioDaoImpl implements ITUsuario{
 
 	@PersistenceContext
 	private EntityManager em;
 	
 	@Override
-	public List<Usuarios> listadoUsuariosAll() throws Exception {
+	public List<Usuario> listUsuarioAll() throws Exception {
 		// TODO Auto-generated method stub
-		 List<Usuarios> result = em.createQuery("from Usuarios").getResultList();
+		 List<Usuario> result = em.createQuery("from Usuario").getResultList();
 		return result;
 	}
 
 	@Override
-	public Usuarios getUsuarioById(long usuId) throws Exception {
+	public Usuario getUsuarioById(long usuId) throws Exception {
 		// TODO Auto-generated method stub
-		return (Usuarios) em.createQuery("from Usuarios where userId =" + usuId).getResultList().get(0);
+		return (Usuario) em.createQuery("from Usuario where userId =" + usuId).getResultList().get(0);
 	}
 
 	@Override
-	public Usuarios getUsusarioByNameByPass(String userName, String userPass) throws Exception {
+	public Usuario getUsuarioByNameByPass(String userName, String userPass) throws Exception {
 		// TODO Auto-generated method stub
-		return (Usuarios) em.createQuery("from Usuarios where userNombre =" + userName + " and userPassword = "+ userPass).getResultList().get(0);
+		return (Usuario) em.createQuery("from Usuario where userNombre =" + userName + " and userPassword = "+ userPass).getResultList().get(0);
 	}
 
-	@Override
 	@Transactional
-	public void creaUsuario(Usuarios usuario) throws Exception {
-		// TODO Auto-generated method stub
+	public void addUsuario(Usuario usuario) throws Exception {
 		em.merge(usuario);
 		em.flush();
 	}
 
 	@Override
-	public void actualizarUsuario(Usuarios usuario) throws Exception {
+	public void updateUsuario(Usuario usuario) throws Exception {
 		// TODO Auto-generated method stub
 		em.merge(usuario);
 	}
 
 	@Override
-	public Usuarios findByUserNombre(String name) {
-		return (Usuarios) em.createQuery("from Usuarios where userNombre=" + name ).getResultList().get(0);
+	public Usuario findByUserNombre(String name) {
+		String hql = "from Usuarios where userNombre = :userNombre"; 		
+		Query query = em.createQuery(hql);		
+		query.setParameter("userNombre",name); 
+		
+		return (Usuario) query.getResultList().get(0);
 	}
 
 }

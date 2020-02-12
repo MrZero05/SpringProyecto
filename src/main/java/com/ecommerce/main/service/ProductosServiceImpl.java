@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ecommerce.main.entities.Productos;
+import com.ecommerce.main.entities.Producto;
 import com.ecommerce.main.repository.ITProductosRepository;
 
 @Service
@@ -15,31 +15,31 @@ public class ProductosServiceImpl implements ITProductosService {
 	ITProductosRepository repoProductoService;
 
 	@Override
-	public void crearProducto(Productos producto) throws Exception {
-		repoProductoService.crearProducto(producto);
+	public void addProducto(Producto producto) throws Exception {
+		repoProductoService.addProducto(producto);
 		
 	}
 
 	@Override
-	public void modificarProducto(Productos producto) throws Exception {
-		repoProductoService.modificarProducto(producto);
+	public void updateProducto(Producto producto) throws Exception {
+		repoProductoService.updateProducto(producto);
 		
 	}
 
 	@Override
-	public List<Productos> listarProductoAll() throws Exception {
-		return repoProductoService.listarProductoAll();
+	public List<Producto> listProductoAll() throws Exception {
+		return repoProductoService.listProductoAll();
 	}
 
 	@Override
-	public Productos getProductoById(long prodId) throws Exception {
+	public Producto getProductoById(long prodId) throws Exception {
 		return repoProductoService.getProductoById(prodId);
 	}
 
 	@Override
-	public List<Productos> listarProductoByCategoria(long catId) throws Exception {
+	public List<Producto> listProductoByCategoria(long catId) throws Exception {
 		
-		return repoProductoService.listarProductoByCategoria(catId);
+		return repoProductoService.listProductoByCategoria(catId);
 	}
 
 }

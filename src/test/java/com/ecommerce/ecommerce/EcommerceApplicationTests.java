@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.ecommerce.main.EcommerceApplication;
-import com.ecommerce.main.entities.Usuarios;
-import com.ecommerce.main.repository.UsuarioRepositotyImpl;
+import com.ecommerce.main.entities.Usuario;
+import com.ecommerce.main.repository.UsuarioRepositoryImpl;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
@@ -20,20 +20,20 @@ import com.ecommerce.main.repository.UsuarioRepositotyImpl;
 class EcommerceApplicationTests {
 	
 	@Autowired
-	UsuarioRepositotyImpl repo;
+	UsuarioRepositoryImpl repo;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
 	@Test
 	public void createUsuario() throws Exception {
-		Usuarios user = new Usuarios();
+		Usuario user = new Usuario();
 		
 		user.setUserId(101);
 		user.setUserNombre("admin");
 		user.setUserPassword(encoder.encode("a1234567"));
 		
-		repo.creaUsuario(user);
+		repo.addUsuario(user);
 		assertTrue(repo.findByUserNombre("admin").getUserNombre().equalsIgnoreCase(user.getUserNombre()) );
 	}
 

@@ -9,7 +9,7 @@ import com.ecommerce.main.dao.ITDetalleFactura;
 import com.ecommerce.main.entities.Detallefactura;
 
 @Repository
-public class DetalleFacturaRepositotyImpl implements ITDetalleFacturaRepository{
+public class DetalleFacturaRepositoryImpl implements ITDetalleFacturaRepository{
 
 	@Autowired
 	ITDetalleFactura daoDetalleFactura;

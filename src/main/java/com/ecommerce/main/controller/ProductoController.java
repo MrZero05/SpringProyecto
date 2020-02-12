@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ecommerce.main.entities.Productos;
+import com.ecommerce.main.entities.Producto;
 import com.ecommerce.main.service.ITProductosService;
 
 @RestController
@@ -18,9 +18,15 @@ public class ProductoController {
 	@Autowired
 	ITProductosService serviceProductos;
 	
-	@GetMapping(value = "/listar/{catId}")
-	public List<Productos> listarProductosByCategoria(@PathVariable(required = true)Long catId) throws Exception{
-		return serviceProductos.listarProductoByCategoria(catId);
+	@GetMapping(value = "/listProducto/{catId}")
+	public List<Producto> listarProductosByCategoria(@PathVariable(required = true)Long catId) throws Exception{
+		return serviceProductos.listProductoByCategoria(catId);
 	}
+	
+	@GetMapping(value = "/getProducto/{prodId}")
+	public Producto getProductosById(@PathVariable(required = true)Long prodId) throws Exception{
+		return serviceProductos.getProductoById(prodId);
+	}
+
 
 }

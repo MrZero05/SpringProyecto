@@ -50,7 +50,7 @@ public class Factura implements Serializable {
     private String factEstado;
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     @ManyToOne
-    private Usuarios userId;
+    private Usuario userId;
     @OneToMany(mappedBy = "factId")
     private Collection<Detallefactura> detallefacturaCollection;
 
@@ -85,11 +85,11 @@ public class Factura implements Serializable {
         this.factEstado = factEstado;
     }
 
-    public Usuarios getUserId() {
+    public Usuario getUserId() {
         return userId;
     }
 
-    public void setUserId(Usuarios userId) {
+    public void setUserId(Usuario userId) {
         this.userId = userId;
     }
 
