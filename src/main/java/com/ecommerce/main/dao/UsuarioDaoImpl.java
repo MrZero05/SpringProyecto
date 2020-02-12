@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ecommerce.main.entities.Usuarios;
 
@@ -35,9 +36,11 @@ public class UsuarioDaoImpl implements ITUsusario{
 	}
 
 	@Override
+	@Transactional
 	public void creaUsuario(Usuarios usuario) throws Exception {
 		// TODO Auto-generated method stub
 		em.merge(usuario);
+		em.flush();
 	}
 
 	@Override
