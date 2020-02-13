@@ -12,7 +12,7 @@ import com.ecommerce.main.entities.Producto;
 import com.ecommerce.main.service.ITProductosService;
 
 @RestController
-@RequestMapping("producto")
+@RequestMapping("api/producto")
 public class ProductoController {
 	
 	@Autowired
