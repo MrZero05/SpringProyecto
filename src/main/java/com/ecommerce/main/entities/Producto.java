@@ -44,6 +44,10 @@ public class Producto implements Serializable {
     private String prodDescription;
     @Column(name = "prodPrecio")
     private Integer prodPrecio;
+    @Column(name = "prodImageMain")
+    private String prodImageMain;
+    @Column(name = "prodImage")
+    private String prodImage;
     @JoinColumn(name = "catId", referencedColumnName = "catId")
     @ManyToOne
     private Categoria catId;
@@ -94,8 +98,24 @@ public class Producto implements Serializable {
     public void setCatId(Categoria catId) {
         this.catId = catId;
     }
+    
+    public String getProdImageMain() {
+		return prodImageMain;
+	}
 
-    @Override
+	public void setProdImageMain(String prodImageMain) {
+		this.prodImageMain = prodImageMain;
+	}
+
+	public String getProdImage() {
+		return prodImage;
+	}
+
+	public void setProdImage(String prodImage) {
+		this.prodImage = prodImage;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (prodId != null ? prodId.hashCode() : 0);
