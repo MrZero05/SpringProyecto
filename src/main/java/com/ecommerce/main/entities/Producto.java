@@ -71,11 +71,11 @@ public class Producto implements Serializable {
         this.prodNombre = prodNombre;
     }
 
-    public String getProdCodigo() {
+    public String getProdDescription() {
         return prodDescription;
     }
 
-    public void setProdCodigo(String prodCodigo) {
+    public void setProdDescription(String prodCodigo) {
         this.prodDescription = prodCodigo;
     }
 
