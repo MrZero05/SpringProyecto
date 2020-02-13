@@ -93,7 +93,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.addHeader("Authorization", TOKEN_BEARER_PREFIX + " " + token);
 
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("token", token);
+        body.put("token", TOKEN_BEARER_PREFIX + " " + token);
         body.put("user", authResult.getPrincipal());
         body.put("mensaje", String.format("Hola %s, has iniciado sesi�n con exito!!!", userName));
 
