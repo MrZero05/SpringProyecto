@@ -37,8 +37,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 	@Value("${spring.security.header}")
 	private String HEADER ;
-	@Value("${spring.security.prefix}")
-	private String PREFIX;
+	
+	private static final String TOKEN_BEARER_PREFIX = "Bearer ";
+	
 	@Value("${spring.security.secret}")
 	private String SECRET;
 
@@ -58,7 +59,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         try {
 
             Usuario user = null;
-            ServletInputStream req = request.getInputStream();
 
             user = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
             username = user.getUserNombre();
@@ -88,14 +88,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .setSubject(userName)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 3600000L))
-                .signWith(SignatureAlgorithm.HS512, "clavesecreta123456".getBytes()).compact();
+                .signWith(SignatureAlgorithm.HS512, "clavesecreta123456").compact();
 
-        response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader("Authorization", TOKEN_BEARER_PREFIX + " " + token);
 
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("token", token);
         body.put("user", authResult.getPrincipal());
-        body.put("mensaje", String.format("Hola %s, has iniciado sesión con exito!!!", userName));
+        body.put("mensaje", String.format("Hola %s, has iniciado sesiï¿½n con exito!!!", userName));
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(body));
         response.setStatus(200);
@@ -107,7 +107,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) 
     		throws IOException, ServletException {
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("mensaje", "Error de autenticación: usuario o contraseña incorrectos");
+        body.put("mensaje", "Error de autenticaciï¿½n: usuario o contraseï¿½a incorrectos");
         body.put("error", failed.getMessage());
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(body));

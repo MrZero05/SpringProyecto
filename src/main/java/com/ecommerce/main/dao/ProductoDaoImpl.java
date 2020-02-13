@@ -45,7 +45,7 @@ public class ProductoDaoImpl implements ITProducto{
 	@Override
 	public List<Producto> listProductoByCategoria(String catNombre) throws Exception {
 		// TODO Auto-generated method stub
-		String hql=  "select p.* from Producto p inner join Categoria c on c.catId = p.catId where p.catNombre = $1";
+		String hql=  "select p from Producto p inner join Categoria c on c.catId = p.catId where p.catNombre = $1";
 		List<Producto> list = em.createQuery(hql).setParameter(1, catNombre).getResultList();
 		return list;
 	}

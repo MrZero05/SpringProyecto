@@ -21,7 +21,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	
 	private static final Log LOG = LogFactory.getLog(JWTAuthorizationFilter.class);
 	private static final String HEADER_AUTHORIZACION_KEY = "token";
-	private static final String PREFIX = "Bearer";
+	public static final String TOKEN_BEARER_PREFIX = "Bearer ";
 	private static final String SECRET_KEY = "clavesecreta123456";
 	
 	public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
@@ -31,9 +31,8 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		LOG.info(PREFIX);
 		String header = request.getHeader(HEADER_AUTHORIZACION_KEY);
-		if (header == null || !header.startsWith(PREFIX)) {
+		if (header == null || !header.startsWith(TOKEN_BEARER_PREFIX)) {
 			chain.doFilter(request, response);
 			return;
 		}
@@ -45,18 +44,20 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 		String token = request.getHeader(HEADER_AUTHORIZACION_KEY);
 		if (token != null) {
-			String tokenReceive = token.replace(PREFIX+" ", "");
+			String tokenReceive = token.replace(TOKEN_BEARER_PREFIX, "");
 			String user = Jwts.parser()
 						.setSigningKey(SECRET_KEY)
-						.parseClaimsJws(token.replace(tokenReceive, ""))
+						.parseClaimsJws(tokenReceive)
 						.getBody()
 						.getSubject();
 
 			if (user != null) {
 				return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
 			}
+			LOG.error("No user found for sending token");
 			return null;
 		}
+		LOG.error("No Header token found");
 		return null;
 	}
 }
