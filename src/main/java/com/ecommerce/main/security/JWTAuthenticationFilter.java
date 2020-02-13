@@ -37,8 +37,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 	@Value("${spring.security.header}")
 	private String HEADER ;
-	@Value("${spring.security.prefix}")
-	private String PREFIX;
+	
+	private static final String TOKEN_BEARER_PREFIX = "Bearer ";
+	
 	@Value("${spring.security.secret}")
 	private String SECRET;
 
@@ -55,18 +56,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String username = null;
         String password = null;
-
         try {
 
             Usuario user = null;
-            ServletInputStream req = request.getInputStream();
 
             user = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
             username = user.getUserNombre();
             password = user.getUserPassword();
-
-            LOG.info("user json: " + username);
-            LOG.info("password json: " + password);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,7 +75,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+    				FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
         String userName = ((User) authResult.getPrincipal()).getUsername();
         Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
@@ -89,17 +86,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userName)
-                .signWith(SignatureAlgorithm.HS512, "clavesecreta123456".getBytes())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 3600000L))
-                .compact();
+                .signWith(SignatureAlgorithm.HS512, "clavesecreta123456").compact();
 
-        response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader("Authorization", TOKEN_BEARER_PREFIX + " " + token);
 
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("token", token);
         body.put("user", authResult.getPrincipal());
-        body.put("mensaje", String.format("Hola %s, has iniciado sesión con exito!!!", userName));
+        body.put("mensaje", String.format("Hola %s, has iniciado sesiï¿½n con exito!!!", userName));
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(body));
         response.setStatus(200);
@@ -111,7 +107,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) 
     		throws IOException, ServletException {
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("mensaje", "Error de autenticación: usuario o contraseña incorrectos");
+        body.put("mensaje", "Error de autenticaciï¿½n: usuario o contraseï¿½a incorrectos");
         body.put("error", failed.getMessage());
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(body));
