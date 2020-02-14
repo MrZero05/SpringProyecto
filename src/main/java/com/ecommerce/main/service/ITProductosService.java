@@ -10,4 +10,6 @@ public interface ITProductosService {
 	public List<Producto> listProductoAll()throws Exception;
 	public Producto getProductoById(long prodId)throws Exception;
 	public List<Producto> listProductoByCategoria(String catNombre)throws Exception;
+	public List<Producto> getProductsByPromotionId(int promoId);
+	public List<Producto> getPromotionProducts();
 }

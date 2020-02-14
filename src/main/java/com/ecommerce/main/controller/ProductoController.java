@@ -27,6 +27,16 @@ public class ProductoController {
 	public Producto getProductosById(@PathVariable(required = true)Long prodId) throws Exception{
 		return serviceProductos.getProductoById(prodId);
 	}
+	
+	@GetMapping(value = "/promoProductList/{promId}")
+	public List<Producto> getPromotionProducts(@PathVariable(required = true)int promId) {
+		return serviceProductos.getProductsByPromotionId(promId);
+	}
+	
+	@GetMapping(value = "/promoProductList")
+	public List<Producto> getPromotionProducts() {
+		return serviceProductos.getPromotionProducts();
+	}
 
 
 }
