@@ -10,4 +10,5 @@ public interface ITUsuarioService {
 	public Usuario getUsuarioByNameByPass(String userName, String userPass) throws Exception;
 	public void addUsuario(Usuario usuario) throws Exception;
 	public void updateUsuario(Usuario usuario)throws Exception;
+	public Usuario findByUserNombre(String userName) throws Exception;
 }

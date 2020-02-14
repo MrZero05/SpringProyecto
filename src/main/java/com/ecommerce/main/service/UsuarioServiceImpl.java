@@ -59,4 +59,9 @@ public class UsuarioServiceImpl implements ITUsuarioService, UserDetailsService{
 		UserDetails userDet = new User(user.getUserNombre(), user.getUserPassword(), roles);
 		return userDet;
 	}
+
+	@Override
+	public Usuario findByUserNombre(String userName) throws Exception {
+		return repoUsuarioService.findByUserNombre(userName);
+	}
 }
