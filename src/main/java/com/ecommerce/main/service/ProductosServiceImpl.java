@@ -42,4 +42,14 @@ public class ProductosServiceImpl implements ITProductosService {
 		return repoProductoService.listProductoByCategoria(catNombre);
 	}
 
+	@Override
+	public List<Producto> getProductsByPromotionId(int promoId) {
+		return repoProductoService.getProductsByPromotionId(promoId);
+	}
+
+	@Override
+	public List<Producto> getPromotionProducts() {
+		return repoProductoService.getPromotionProducts();
+	}
+
 }

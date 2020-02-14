@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
@@ -44,20 +45,25 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 		String token = request.getHeader(HEADER_AUTHORIZACION_KEY);
 		if (token != null) {
-			String tokenReceive = token.replace(TOKEN_BEARER_PREFIX, "");
-			String user = Jwts.parser()
-						.setSigningKey(SECRET_KEY)
-						.parseClaimsJws(tokenReceive)
-						.getBody()
-						.getSubject();
-
-			if (user != null) {
-				return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+			try {
+				String tokenReceive = token.replace(TOKEN_BEARER_PREFIX, "");
+				String user = Jwts.parser()
+							.setSigningKey(SECRET_KEY)
+							.parseClaimsJws(tokenReceive)
+							.getBody()
+							.getSubject();
+	
+				if (user != null) {
+					return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+				}
+				LOG.error("No user found for sending token");
+				return null;
+			} catch (ExpiredJwtException expJwtEx) {
+				LOG.error("Su sesion a experidao: " + expJwtEx);
 			}
-			LOG.error("No user found for sending token");
-			return null;
 		}
 		LOG.error("No Header token found");
 		return null;
 	}
+	
 }
