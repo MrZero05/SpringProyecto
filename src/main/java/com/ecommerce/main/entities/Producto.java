@@ -51,6 +51,9 @@ public class Producto implements Serializable {
     @JoinColumn(name = "catId", referencedColumnName = "catId")
     @ManyToOne
     private Categoria catId;
+    @JoinColumn(name = "promId", referencedColumnName = "promId")
+    @ManyToOne
+    private Promocion promId;
 
     public Producto() {
     }
@@ -139,5 +142,13 @@ public class Producto implements Serializable {
     public String toString() {
         return "jpa.Producto[ prodId=" + prodId + " ]";
     }
+
+	public Promocion getPromId() {
+		return promId;
+	}
+
+	public void setPromId(Promocion promId) {
+		this.promId = promId;
+	}
     
 }
