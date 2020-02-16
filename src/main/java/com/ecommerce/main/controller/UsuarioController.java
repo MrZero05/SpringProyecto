@@ -37,8 +37,7 @@ public class UsuarioController {
 	public ValidateUser validUser(@PathVariable(required = true)String userNombre ) throws Exception {
 		ValidateUser validateUser =  new ValidateUser();
 		Usuario resultUser;
-		resultUser = serviceUsuario.findByUserNombre(userNombre);
-		
+		resultUser = serviceUsuario.findByUserNombre(userNombre);		
 		if (resultUser != null) {
 			validateUser.setCode("01");
 			validateUser.setMessage("Ya existe el usuario");
@@ -50,6 +49,5 @@ public class UsuarioController {
 			validateUser.setValue("accept");
 			return validateUser;
 		}
-	    
 	}
 }
