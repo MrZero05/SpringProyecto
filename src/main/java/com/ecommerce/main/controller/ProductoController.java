@@ -28,7 +28,7 @@ public class ProductoController {
 		return serviceProductos.getProductoById(prodId);
 	}
 	
-	@GetMapping(value = "/promoProductList/{promId}")
+	@GetMapping(value = "/promoProductList2/{promId}")
 	public List<Producto> getPromotionProducts(@PathVariable(required = true)int promId) {
 		return serviceProductos.getProductsByPromotionId(promId);
 	}

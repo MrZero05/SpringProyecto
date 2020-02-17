@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
@@ -15,11 +16,13 @@ public class FacturaDaoImpl implements ITFactura{
 	@PersistenceContext
 	private EntityManager em;
 	
-	@Override
-	public void crearFactura(Factura factura) throws Exception {
+	@Transactional
+	public Factura crearFactura(Factura factura) throws Exception {
 		// TODO Auto-generated method stub
-		em.merge(factura);
+		Factura f = em.merge(factura);
 		em.flush();
+		return f;
+		
 	}
 
 	@Override

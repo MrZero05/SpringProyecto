@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.main.dto.FacturaRegistrerDTO;
 import com.ecommerce.main.entities.Factura;
 import com.ecommerce.main.repository.ITFacturaRepository;
 
@@ -15,8 +16,8 @@ public class FacturaServiceImpl implements ITFacturaService{
 	ITFacturaRepository repoFacturaService;
 
 	@Override
-	public void crearFactura(Factura factura) throws Exception {
-		repoFacturaService.crearFactura(factura);
+	public void crearFactura(FacturaRegistrerDTO facturaDTO) throws Exception {
+		repoFacturaService.crearFactura(facturaDTO);
 		
 	}
 
