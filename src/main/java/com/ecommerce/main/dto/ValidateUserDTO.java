@@ -1,6 +1,6 @@
 package com.ecommerce.main.dto;
 
-public class ValidateUser {
+public class ValidateUserDTO {
 	
 	private String code;
 	private String message;

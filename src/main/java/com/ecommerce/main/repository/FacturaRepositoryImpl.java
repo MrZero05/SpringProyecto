@@ -55,16 +55,6 @@ public class FacturaRepositoryImpl implements ITFacturaRepository{
 			daoDetalleFactura.crearDetalleFactura(detallefactura);
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	@Override

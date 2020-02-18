@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.main.dto.UserRegisterDTO;
-import com.ecommerce.main.dto.ValidateUser;
+import com.ecommerce.main.dto.ValidateUserDTO;
 import com.ecommerce.main.entities.Usuario;
 import com.ecommerce.main.service.ITUsuarioService;
 
@@ -34,8 +34,8 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/validatoruser/{userNombre}")
-	public ValidateUser validUser(@PathVariable(required = true)String userNombre ) throws Exception {
-		ValidateUser validateUser =  new ValidateUser();
+	public ValidateUserDTO validUser(@PathVariable(required = true)String userNombre ) throws Exception {
+		ValidateUserDTO validateUser =  new ValidateUserDTO();
 		Usuario resultUser;
 		resultUser = serviceUsuario.findByUserNombre(userNombre);		
 		if (resultUser != null) {
