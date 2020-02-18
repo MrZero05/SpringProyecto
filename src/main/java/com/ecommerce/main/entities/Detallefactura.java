@@ -48,6 +48,11 @@ public class Detallefactura implements Serializable {
     @JoinColumn(name = "prodId", referencedColumnName = "prodId")
     @ManyToOne
     private Producto prodId;
+    @Column(name = "porcDescuento")
+    private Integer porcDescuento;
+    @Column(name = "porcValor")
+    private Integer porcValor;
+    
 
     public Detallefactura() {
     }
@@ -120,5 +125,21 @@ public class Detallefactura implements Serializable {
     public String toString() {
         return "jpa.Detallefactura[ detfactId=" + detfactId + " ]";
     }
+
+	public Integer getPorcDescuento() {
+		return porcDescuento;
+	}
+
+	public void setPorcDescuento(Integer porcDescuento) {
+		this.porcDescuento = porcDescuento;
+	}
+
+	public Integer getPorcValor() {
+		return porcValor;
+	}
+
+	public void setPorcValor(Integer porcValor) {
+		this.porcValor = porcValor;
+	}
     
 }

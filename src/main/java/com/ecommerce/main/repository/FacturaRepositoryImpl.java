@@ -50,8 +50,9 @@ public class FacturaRepositoryImpl implements ITFacturaRepository{
 				Detallefactura detallefactura = new Detallefactura();
 				detallefactura.setDetfactCantidad(detalleFacturaDTO.getDetfactCantidad());
 				detallefactura.setDetfactValor(detalleFacturaDTO.getDetfactValor());
+				detallefactura.setPorcDescuento(detalleFacturaDTO.getPorcDescuento());
+				detallefactura.setPorcValor(detalleFacturaDTO.getPorcValor());
 				Producto producto = daoProducto.getProductoById(detalleFacturaDTO.getProdId());
-				//producto.setProdId(detalleFacturaDTO.getProdId());
 				detallefactura.setProdId(producto);
 				detallefactura.setFactId(factura);
 				daoDetalleFactura.crearDetalleFactura(detallefactura);
