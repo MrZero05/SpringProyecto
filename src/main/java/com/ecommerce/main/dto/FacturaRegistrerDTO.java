@@ -1,6 +1,7 @@
 package com.ecommerce.main.dto;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
 import com.ecommerce.main.entities.Usuario;
