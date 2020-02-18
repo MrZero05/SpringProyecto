@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<style type="text/css">
+		div.container {
+		    font: normal 12px Arial, Helvetica, Sans-serif;
+		    background: white;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			margin: 10px 100px 10px 100px;
+		}
+		.title {
+			font-size: 20px;
+    		text-transform: uppercase;
+		}
+		table {
+			margin-top: 50px;
+		}
+		.invoiceId {
+			text-align: end;
+		}
+		.invoice-det {
+			margin-top: 40px;
+			padding-top: 10px;
+			text-align: center;
+		}
+	</style>
+<meta charset="ISO-8859-1">
+<title>Factura de compra</title>
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			Factura de Compra
+		</div>
+		<table>
+			<thead class="fact-head">
+				<tr class="client-name">
+					<td></td>
+					<td class="invoiceId">Factura N:</td>
+					<td th:text="${data.id}">ID</td>
+				</tr>
+				<tr class="client-name">
+					<td>Nombre Cliente</td>
+					<td></td>
+					<td th:text="${data.userName}">Nombre</td>
+				</tr>
+				<tr>
+					<td>Fecha de Compra</td>
+					<td></td>
+					<td th:text="${data.date}">Fecha</td>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+		<div class="invoice-det">
+			Detalle de compra
+		</div>
+		<table>
+			<thead class="fact-head">
+				<tr>
+					<td>ID</td>
+					<td>Nombre</td>
+					<td>Cantidad</td>
+					<td>Precio</td>
+					<td>Total</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="item: ${data.det}">
+					<td th:text="${item.prodId}"></td>
+					<td th:text="${item.prodName}"></td>
+					<td th:text="${item.prodQty}"></td>
+					<td th:text="${item.unitPrice}"></td>
+					<td th:text="${item.TotalPrice}"></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>Total: </td>
+					<td th:text="${data.total}"></td>
+				</tr>
+			</tfoot>
+		</table>
+
+		<div class="fact-body">
+
+		</div>
+	</div>
+</body>
+</html>

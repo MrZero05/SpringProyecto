@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ecommerce.main.business.BillToPdf;
 import com.ecommerce.main.dao.ITDetalleFactura;
 import com.ecommerce.main.dao.ITFactura;
 import com.ecommerce.main.dao.ITProducto;
@@ -41,20 +42,27 @@ public class FacturaRepositoryImpl implements ITFacturaRepository{
 		factura.setUserId(daoUsuario.findByUserNombre(facturaDTO.getUserName()));
 		factura = daoFactura.crearFactura(factura);
 		
+		List<Detallefactura> detList = new ArrayList<Detallefactura>();
+		
 		for(DetalleFacturaRegistrerDTO detalleFacturaDTO: facturaDTO.getListDetalleFactura()) {
+			
 			if(detalleFacturaDTO.getProdId()!= null) {
-			Detallefactura detallefactura = new Detallefactura();
-			detallefactura.setDetfactCantidad(detalleFacturaDTO.getDetfactCantidad());
-			detallefactura.setDetfactValor(detalleFacturaDTO.getDetfactValor());
-			detallefactura.setPorcDescuento(detalleFacturaDTO.getPorcDescuento());
-			detallefactura.setPorcValor(detalleFacturaDTO.getPorcValor());
-			Producto producto = new Producto();
-			producto.setProdId(detalleFacturaDTO.getProdId());
-			detallefactura.setProdId(producto);
-			detallefactura.setFactId(factura);
-			daoDetalleFactura.crearDetalleFactura(detallefactura);
+				Detallefactura detallefactura = new Detallefactura();
+				detallefactura.setDetfactCantidad(detalleFacturaDTO.getDetfactCantidad());
+				detallefactura.setDetfactValor(detalleFacturaDTO.getDetfactValor());
+				detallefactura.setPorcDescuento(detalleFacturaDTO.getPorcDescuento());
+				detallefactura.setPorcValor(detalleFacturaDTO.getPorcValor());
+				Producto producto = daoProducto.getProductoById(detalleFacturaDTO.getProdId());
+				detallefactura.setProdId(producto);
+				detallefactura.setFactId(factura);
+				daoDetalleFactura.crearDetalleFactura(detallefactura);
+				
+				detList.add(detallefactura);
 			}
 		}
+		
+		BillToPdf pdf = new BillToPdf();
+		pdf.generateBillPDF(factura, detList);			
 	}
 
 	@Override
